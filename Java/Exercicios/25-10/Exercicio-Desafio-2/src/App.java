@@ -20,9 +20,6 @@ public class App {
         Scanner teclado = new Scanner(System.in);
             String nome, primeiroNome, sobrenome;
             char sexo;
-            int posicaoAtual = 0;
-            int posicaoAnterior = 0;
-            int tamanhoNome;
             
             System.out.print("Digite o nome: ");
             nome = teclado.nextLine();
