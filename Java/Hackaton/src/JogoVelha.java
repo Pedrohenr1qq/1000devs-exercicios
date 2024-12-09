@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -216,13 +217,6 @@ public class JogoVelha {
      
         return posicao;
      }
-     
-    
-    // static int[] converterJogadaStringParaVetorInt(String jogada) {
-    //     int[] posicao = new int[2];
-    //     for(int i = 0; i < posicao.length; i++) posicao[i] =  Integer.valueOf(String.valueOf( jogada.charAt(i)));
-    //     return posicao;
-    // }
 
     static char[][] processarVezUsuario(Scanner teclado, char[][] tabuleiro, char caractereUsuario) {
         System.out.printf("Usuário %c faça sua jogada\n\n", caractereUsuario);
@@ -316,18 +310,6 @@ public class JogoVelha {
         System.out.println("Vitória pela diagonal principal");
         return true;
     }
-
-	// static boolean teveGanhadorDiagonalPrincipal(char[][] tabuleiro, char caractereJogador) {
-    //     int qtCaracteresIguais = 0;
-    //     for(int i=0; i<tabuleiro.length; i++){
-    //         if(tabuleiro[i][i] == caractereJogador) qtCaracteresIguais++;
-    //     }
-
-    //     if(qtCaracteresIguais == tabuleiro.length) System.out.println("Vitoria pela diagonal principal");
-
-    //     return (qtCaracteresIguais == tabuleiro.length);
-	// }
-
     
     static boolean teveGanhadorDiagonalSecundaria(char[][] tabuleiro, char caractereJogador) {
         int n = tabuleiro.length;
@@ -340,17 +322,9 @@ public class JogoVelha {
         return true;
     }
 
-
-	// static boolean teveGanhadorDiagonalSecundaria(char[][] tabuleiro, char caractereJogador) {
-    //     int qtCaracteresIguais = 0;
-    //     for(int i=0; i<tabuleiro.length; i++){
-    //         if(tabuleiro[i][tabuleiro.length - 1- i] == caractereJogador) qtCaracteresIguais++;
-    //     }
-
-    //     if(qtCaracteresIguais == tabuleiro.length) System.out.println("Vitoria pela diagonal secundaria");
-
-    //     return (qtCaracteresIguais == tabuleiro.length);
-	// }
+    // static void limparTela() throws InterruptedException, IOException {
+    //     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    // }
 
     //Limpar tela para Linux
     static void limparTela(){
@@ -360,7 +334,6 @@ public class JogoVelha {
             e.printStackTrace();
           }
     }
-
 
     static void exibirTabuleiro(char[][] tabuleiro) { 
         limparTela();
