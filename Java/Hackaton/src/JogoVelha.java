@@ -73,14 +73,11 @@ public class JogoVelha {
             }
 
             if ( teveEmpate(tabuleiro)) {
+                //TODO: Exiba que ocorreu empate
+                exibirEmpate();
 
-            //TODO: Exiba que ocorreu empate
-            exibirEmpate();
-
-            jogoContinua = false;
-        }
-
-        System.out.println(retornarPosicoesLivres(tabuleiro));
+                jogoContinua = false;
+            }
 
         }while(jogoContinua);
 
@@ -89,19 +86,6 @@ public class JogoVelha {
 
     // ===================== FIM MAIN =======================
 
-    /*
-        public char [][] inicializarTabuleiro(int tamanho) {
-            char[][] tabuleiro = new char [tamanho][tamanho];
-            
-            for(int i = 0; i < tamanho; i++){
-                for (int j=0; j < tamanho; j++){
-                    tabuleiro[i][j]=' ';
-                }
-            }
-            
-            return tabuleiro;
-        }
-    */
     static char[][] inicializarTabuleiro(char[][] tabuleiro) {
         for(int i = 0; i < tabuleiro.length; i++){
             for(int j = 0; j < tabuleiro.length; j++){
@@ -127,20 +111,6 @@ public class JogoVelha {
            
         }
     }
-
-    /*
-    static char obterCaractereUsuario(Scanner teclado) {
-        while(true){
-            System.out.print("Digite o caracter que você deseja utilizar X, O, 0, U, C: ");
-            char escolha = teclado.nextLine().toUpperCase().charAt(0);
-            if(CARACTERES_IDENTIFICADORES_ACEITOS.contains((String.valueOf(escolha)))){
-                return escolha;
-            } else{
-                System.out.println("Esta escolha não é possivel! Tente novamente.");
-            }
-        }
-    }
-    */
 
     static char obterCaractereComputador(Scanner teclado, char caractereUsuario) {
         final char[] CARACTERES_IDENTIFICADORES_ACEITOS = {'X','O','0','U','C'};
@@ -174,9 +144,7 @@ public class JogoVelha {
     }
     
     static boolean jogadaValida(String posicoesLivres, int linha, int coluna) {
-       
         String posicao = linha + "" + coluna;
-
 
          if(posicoesLivres.contains(posicao)){
            
@@ -191,13 +159,6 @@ public class JogoVelha {
         }
     }
 
-    /* 
-    static boolean jogadaValida(String posicoesLivres, int linha, int coluna) {
-        String jogadaUsuario = ""+linha+coluna;
-        return posicoesLivres.contains(jogadaUsuario);
-    }
-
-    */
     
     static int[] obterJogadaUsuario(String posicoesLivres, Scanner teclado) {
         boolean jogadaUsuarioValida = false;
@@ -242,27 +203,26 @@ public class JogoVelha {
         return converterJogadaStringParaVetorInt(posicaoSorteada);
     }
 
-     
-/*
-    static int[] obterJogadaComputador(String posicoesLivres) {
-        String[] posicoes = posicoesLivres.split(";");
-
-        Random random = new Random();
-
-        int indexPosicaoComputador = random.nextInt(posicoes.length);
-
-        String posicaoComputador = posicoes[indexPosicaoComputador];
-
-        return  converterJogadaStringParaVetorInt(posicaoComputador);
-	}
-
-    */
-    
     static int[] converterJogadaStringParaVetorInt(String jogada) {
+        if (jogada == null || jogada.length() != 2 || !jogada.matches("[0-9]{2}")) {
+            throw new IllegalArgumentException("A jogada deve ser uma string com dois números.");
+        }
+     
+     
         int[] posicao = new int[2];
-        for(int i = 0; i < posicao.length; i++) posicao[i] =  Integer.valueOf(String.valueOf( jogada.charAt(i)));
+        posicao[0] = Character.getNumericValue(jogada.charAt(0)); // Linha
+        posicao[1] = Character.getNumericValue(jogada.charAt(1)); // Coluna
+     
+     
         return posicao;
-    }
+     }
+     
+    
+    // static int[] converterJogadaStringParaVetorInt(String jogada) {
+    //     int[] posicao = new int[2];
+    //     for(int i = 0; i < posicao.length; i++) posicao[i] =  Integer.valueOf(String.valueOf( jogada.charAt(i)));
+    //     return posicao;
+    // }
 
     static char[][] processarVezUsuario(Scanner teclado, char[][] tabuleiro, char caractereUsuario) {
         System.out.printf("Usuário %c faça sua jogada\n\n", caractereUsuario);
@@ -321,41 +281,7 @@ public class JogoVelha {
         return false; // Nenhuma linha tem todos os caracteres iguais
     }
 
-/*
-    static boolean teveGanhadorLinha(char[][] tabuleiro, char caractereJogador) {
-        int qtCaracteresIguais = 0;
-        boolean teveGanhador = false;
-
-        for(int i=0; i<tabuleiro.length; i++){
-            for(int j = 0; j < tabuleiro.length; j++){
-                if(tabuleiro[i][j] == caractereJogador) qtCaracteresIguais++;
-            }
-            teveGanhador = (qtCaracteresIguais == tabuleiro.length);
-            if(teveGanhador) break;
-            else qtCaracteresIguais = 0;
-        }
-
-        if(teveGanhador) System.out.println("Teve ganhador pela linha");
-
-
-        return teveGanhador;  	
-    }
-
-    */
-    /*
-     
-        static boolean teveGanhadorLinha(char[][] tabuleiro, char caractereJogador) {
-        for(int i=0; i<3; i++){
-            if(tabuleiro[i][0]==tabuleiro[i][1] && tabuleiro[i][1]==tabuleiro[i][2]){
-                return true;
-            }
-        }
-        return false;  	
-    }
-
-     */
-
-     static boolean teveGanhadorColuna(char[][] tabuleiro, char caractereJogador) {
+    static boolean teveGanhadorColuna(char[][] tabuleiro, char caractereJogador) {
         int contadorCaractereJogador = 0;
         boolean ganhadorColuna = false;
 
@@ -378,55 +304,53 @@ public class JogoVelha {
         if(ganhadorColuna) System.out.println("Teve ganhador pela coluna");
            
          return ganhadorColuna;
-        }
-/*
-    
-    static boolean teveGanhadorColuna(char[][] tabuleiro, char caractereJogador) {
-        int qtCaracteresIguais = 0;
-        boolean teveGanhador = false;
+    }
 
-        for(int i=0; i<tabuleiro.length; i++){
-            for(int j = 0; j < tabuleiro.length; j++){
-                if(tabuleiro[j][i] == caractereJogador) qtCaracteresIguais++;
+
+    static boolean teveGanhadorDiagonalPrincipal(char[][] tabuleiro, char caractereJogador) {
+        for (int i = 0; i < tabuleiro.length; i++) {
+            if (tabuleiro[i][i] != caractereJogador) {
+                return false;
             }
-            teveGanhador = (qtCaracteresIguais == tabuleiro.length);
-            if(teveGanhador) break;
-            else qtCaracteresIguais = 0;
         }
-        
-        return teveGanhador;
-	}
+        System.out.println("Vitória pela diagonal principal");
+        return true;
+    }
 
-    */
+	// static boolean teveGanhadorDiagonalPrincipal(char[][] tabuleiro, char caractereJogador) {
+    //     int qtCaracteresIguais = 0;
+    //     for(int i=0; i<tabuleiro.length; i++){
+    //         if(tabuleiro[i][i] == caractereJogador) qtCaracteresIguais++;
+    //     }
 
-	static boolean teveGanhadorDiagonalPrincipal(char[][] tabuleiro, char caractereJogador) {
-        int qtCaracteresIguais = 0;
-        for(int i=0; i<tabuleiro.length; i++){
-            if(tabuleiro[i][i] == caractereJogador) qtCaracteresIguais++;
+    //     if(qtCaracteresIguais == tabuleiro.length) System.out.println("Vitoria pela diagonal principal");
+
+    //     return (qtCaracteresIguais == tabuleiro.length);
+	// }
+
+    
+    static boolean teveGanhadorDiagonalSecundaria(char[][] tabuleiro, char caractereJogador) {
+        int n = tabuleiro.length;
+        for (int i = 0; i < n; i++) {
+            if (tabuleiro[i][n - 1 - i] != caractereJogador) {
+                return false;
+            }
         }
+        System.out.println("Vitória pela diagonal secundária");
+        return true;
+    }
 
-        if(qtCaracteresIguais == tabuleiro.length) System.out.println("Vitoria pela diagonal principal");
 
-        return (qtCaracteresIguais == tabuleiro.length);
-	}
+	// static boolean teveGanhadorDiagonalSecundaria(char[][] tabuleiro, char caractereJogador) {
+    //     int qtCaracteresIguais = 0;
+    //     for(int i=0; i<tabuleiro.length; i++){
+    //         if(tabuleiro[i][tabuleiro.length - 1- i] == caractereJogador) qtCaracteresIguais++;
+    //     }
 
-	static boolean teveGanhadorDiagonalSecundaria(char[][] tabuleiro, char caractereJogador) {
-        int qtCaracteresIguais = 0;
-        for(int i=0; i<tabuleiro.length; i++){
-            if(tabuleiro[i][tabuleiro.length - 1- i] == caractereJogador) qtCaracteresIguais++;
-        }
+    //     if(qtCaracteresIguais == tabuleiro.length) System.out.println("Vitoria pela diagonal secundaria");
 
-        if(qtCaracteresIguais == tabuleiro.length) System.out.println("Vitoria pela diagonal secundaria");
-
-        return (qtCaracteresIguais == tabuleiro.length);
-	}
-
-    //Limpar tela para Windows
-    /*
-    static void limparTela() throws InterruptedException, IOException {
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-    }   
-    */
+    //     return (qtCaracteresIguais == tabuleiro.length);
+	// }
 
     //Limpar tela para Linux
     static void limparTela(){
@@ -437,18 +361,6 @@ public class JogoVelha {
           }
     }
 
-    /*
-    static void exibirTabuleiro(char[][] tabuleiro) {       
-        limparTela();
-
-        System.out.println("COLUNA        " + 1 + "       " + 2 + "       " + 3);
-        System.out.println("LINHA 1       " + tabuleiro [0][0] +"   |   "+ tabuleiro[0][1] +"   |   "+tabuleiro[0][2]);
-        System.out.println("           -------+-------+-------");
-        System.out.println("LINHA 2       " + tabuleiro [1][0] +"   |   "+ tabuleiro[1][1] +"   |   "+tabuleiro[1][2]);
-        System.out.println("           -------+-------+-------");
-        System.out.println("LINHA 3       " + tabuleiro [2][0] +"   |   "+ tabuleiro[2][1] +"   |   "+tabuleiro[2][2]);;
-    }
- */
 
     static void exibirTabuleiro(char[][] tabuleiro) { 
         limparTela();
