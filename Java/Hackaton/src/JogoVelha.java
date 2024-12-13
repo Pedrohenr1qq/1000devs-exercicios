@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,7 +9,7 @@ public class JogoVelha {
 
     // Tamanho do tabuleiro 3x3. Para o primeiro nivel de dificuldade
     // considere que este valor não será alterado.
-    final static int TAMANHO_TABULEIRO = 3;
+    final static int TAMANHO_TABULEIRO = 10;
 
     public static void main(String[] args) throws Exception {
         Scanner teclado = new Scanner(System.in);
@@ -206,17 +205,16 @@ public class JogoVelha {
 
     static int[] converterJogadaStringParaVetorInt(String jogada) {
         if (jogada == null || jogada.length() != 2 || !jogada.matches("[0-9]{2}")) {
-            throw new IllegalArgumentException("A jogada deve ser uma string com dois números.");
+           System.out.println("A jogada deve ser uma string com dois números.");
         }
-     
      
         int[] posicao = new int[2];
         posicao[0] = Character.getNumericValue(jogada.charAt(0)); // Linha
         posicao[1] = Character.getNumericValue(jogada.charAt(1)); // Coluna
-     
-     
+    
         return posicao;
      }
+     
 
     static char[][] processarVezUsuario(Scanner teclado, char[][] tabuleiro, char caractereUsuario) {
         System.out.printf("Usuário %c faça sua jogada\n\n", caractereUsuario);
