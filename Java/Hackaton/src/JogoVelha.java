@@ -320,18 +320,22 @@ public class JogoVelha {
         return true;
     }
 
-    // static void limparTela() throws InterruptedException, IOException {
-    //     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-    // }
-
-    //Limpar tela para Linux
     static void limparTela(){
         try {
-            new ProcessBuilder("clear").inheritIO().start().waitFor();	
-          } catch(Exception e) {
-            e.printStackTrace();
-          }
+          new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch(Exception e) {
+          e.printStackTrace();
+        }  
     }
+
+    //Limpar tela para Linux
+    // static void limparTela(){
+    //     try {
+    //         new ProcessBuilder("clear").inheritIO().start().waitFor();	
+    //       } catch(Exception e) {
+    //         e.printStackTrace();
+    //       }
+    // }
 
     static void exibirTabuleiro(char[][] tabuleiro) { 
         limparTela();
