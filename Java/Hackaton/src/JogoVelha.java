@@ -9,7 +9,7 @@ public class JogoVelha {
 
     // Tamanho do tabuleiro 3x3. Para o primeiro nivel de dificuldade
     // considere que este valor não será alterado.
-    final static int TAMANHO_TABULEIRO = 10;
+    final static int TAMANHO_TABULEIRO = 3;
 
     public static void main(String[] args) throws Exception {
         Scanner teclado = new Scanner(System.in);
