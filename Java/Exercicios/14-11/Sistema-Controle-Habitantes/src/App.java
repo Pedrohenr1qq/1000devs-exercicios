@@ -39,18 +39,43 @@ public class App {
 
         imprimirDados(nomes, salarios, numeroDeps, ultimaPosicaoGravada);
 
+        System.out.println();
+
+        mostrarMediaSalarios(mediaSalarios(salarios, ultimaPosicaoGravada));
+
+        float mediaDependentes = calcularMediaDependentes(numeroDeps, ultimaPosicaoGravada);
+        mostrarMediaDependentes(mediaDependentes);
+        System.out.println();
+
+        int indiceMenorQuantidadeDependentes = obterIndiceMenorQuantidadeDependentes(numeroDeps, ultimaPosicaoGravada);
+        mostrarMenorQuantidadeDependentes(indiceMenorQuantidadeDependentes, nomes, numeroDeps);
+        System.out.println();
+
+        int indiceMaiorSalario = obterIndiceMaiorSalario(salarios, ultimaPosicaoGravada);
+        mostrarMaiorSalario(indiceMaiorSalario, nomes, salarios);
+        System.out.println();
+
+        mostrarDependentesAbaixoMedia(mediaDependentes, nomes, numeroDeps, ultimaPosicaoGravada);
+        System.out.println();
+
         teclado.close();
     }
 
     static void imprimirDados(String nomes[], float salarios[], int numeroDeps[], int ultimaPosicaoGravada){
         //acessando os dados para imprimir na tela
         int qtdeEspacos;
+        String nomePadronizado = "";
         System.out.println("\nNome                Salario                QtdeDependentes");
         System.out.println("----------------------------------------------------------");
         
         for (int posicaoVetor = 0; posicaoVetor <= ultimaPosicaoGravada; posicaoVetor++) {
             //imprime o nome do habitante
-            System.out.print(nomes[posicaoVetor]);
+            if(nomes[posicaoVetor].length() > 19){
+                nomePadronizado = nomes[posicaoVetor].substring(0, 16) + "...";
+            }
+            else nomePadronizado = nomes[posicaoVetor];
+
+            System.out.print(nomePadronizado);
             
             //calcula quantos espacos sao necessarios para alinhar
             //o valor do salario na posicao da coluna salario
@@ -106,5 +131,91 @@ public class App {
         
         return numeroDeps;
     }
-     
+
+    static float mediaSalarios(float[] salarios, int ultimaPosicaoGravada){
+        float soma = 0, media = 0;
+        for(float salario: salarios){
+            soma += salario; 
+        }
+
+        media = soma/(ultimaPosicaoGravada+1);
+
+        return media;
+    }
+
+    static void mostrarMediaSalarios(float mediaSalarios){
+        System.out.printf("Média dos salários: R$%.2f%n", mediaSalarios);
+    }
+
+    static float calcularMediaDependentes(int[] numeroDeps, int ultimaPosicaoGravada){
+        int soma = 0;
+        float media = 0;
+        for(int dependentes: numeroDeps){
+            soma += dependentes; 
+        }
+
+        media = (float) soma / (float) (ultimaPosicaoGravada+1);
+        
+        return media;
+    }
+
+    static void mostrarMediaDependentes(float mediaDependentes){
+        System.out.printf("Média de dependentes: %.1f%n", mediaDependentes);
+    }
+
+    static int obterIndiceMenorQuantidadeDependentes(int[] numeroDeps, int ultimaPosicaoGravada){
+        int menorQuantidade = numeroDeps[0], indiceMenorQuantidadeDependentes = 0;
+        for(int i = 1; i <= ultimaPosicaoGravada; i++){
+            if(menorQuantidade > numeroDeps[i]){
+                menorQuantidade = numeroDeps[i];
+                indiceMenorQuantidadeDependentes = i;
+            }
+        }
+
+        return indiceMenorQuantidadeDependentes;
+    }
+
+    static void mostrarMenorQuantidadeDependentes(int indiceMenorQuantidadeDependentes, String[] nomes, int[] numeroDeps){
+        String habitante = nomes[indiceMenorQuantidadeDependentes];
+        int dependentes = numeroDeps[indiceMenorQuantidadeDependentes];
+        System.out.println("Habitante com a menor quantidade de dependentes: "+ habitante);
+        System.out.println("Quantidade de dependentes de "+ habitante +": "+ dependentes);
+    }
+
+    static int obterIndiceMaiorSalario(float[] salarios, int ultimaPosicaoGravada){
+        float menorSalario = salarios[0];
+        int indiceMaiorSalario = 0;
+        for(int i = 1; i <= ultimaPosicaoGravada; i++){
+            if(menorSalario < salarios[i]){
+                menorSalario = salarios[i];
+                indiceMaiorSalario = i;
+            }
+        }
+
+        return indiceMaiorSalario;
+    }
+
+    static void mostrarMaiorSalario(int indiceMaiorSalario, String[] nomes, float[] salarios){
+        String habitante = nomes[indiceMaiorSalario];
+        float salario = salarios[indiceMaiorSalario];
+        System.out.println("Nome do habitante com maior salário: "+ habitante);
+        System.out.printf("Valor do salário de %s R$%.2f%n", habitante, salario);
+    }
+
+    static void mostrarDependentesAbaixoMedia(float mediaDependentes, String[] nomes, int[] numeroDeps, int ultimaPosicaoGravada){
+        String nomePadronizado;
+        System.out.println(("Nome                   Qtde de dependentes"));
+
+        for(int i = 0; i <= ultimaPosicaoGravada; i++){
+            if(numeroDeps[i] < mediaDependentes){
+                if(nomes[i].length() > 19){
+                    nomePadronizado = nomes[i].substring(0, 16) + "...";
+                }
+                else nomePadronizado = nomes[i];
+
+                System.out.println(nomePadronizado+"               "+numeroDeps[i]);
+            }
+        }
+    }
+
 }
