@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Exercicios/03-10/Exercicio-1/src"/>
+	<classpathentry kind="src" path="Exercicios/03-10/exercicio-2/src"/>
+	<classpathentry kind="src" path="Exercicios/03-10/exercicio-3/src"/>
+	<classpathentry kind="src" path="Exercicios/03-10/exercicio-4/src"/>
+	<classpathentry kind="src" path="Exercicios/03-10/exercicio-5/src"/>
+	<classpathentry kind="src" path="Exercicios/03-10/exercicio-6/src"/>
+	<classpathentry kind="src" path="Exercicios/03-10/exercicio-7/src"/>
+	<classpathentry kind="src" path="Exercicios/03-10/exercicio-8/src"/>
+	<classpathentry kind="src" path="Exercicios/06-11/Desafio_Da_Forca/src"/>
+	<classpathentry kind="src" path="Exercicios/07-11/Jogo-Pedra-Papel-Tesoura/Algoritmo-Caixa-Eletronico/src"/>
+	<classpathentry kind="src" path="Exercicios/07-11/Jogo-Pedra-Papel-Tesoura/src"/>
+	<classpathentry kind="src" path="Exercicios/10-10/exercicio-1/src"/>
+	<classpathentry kind="src" path="Exercicios/10-10/exercicio-2/src"/>
+	<classpathentry kind="src" path="Exercicios/10-10/exercicio-3/src"/>
+	<classpathentry kind="src" path="Exercicios/10-10/exercicio-4/src"/>
+	<classpathentry kind="src" path="Exercicios/10-10/exercicio-5/src"/>
+	<classpathentry kind="src" path="Exercicios/14-11/Sistema-Controle-Habitantes/src"/>
+	<classpathentry kind="src" path="Exercicios/17-10/Codigo-Desafio/src"/>
+	<classpathentry kind="src" path="Exercicios/19-12/ConnectDatabase/src"/>
+	<classpathentry kind="src" path="Exercicios/21-11/src"/>
+	<classpathentry kind="src" path="Exercicios/25-10/Exercicio-Desafio-1/src"/>
+	<classpathentry kind="src" path="Exercicios/25-10/Exercicio-Desafio-2/src"/>
+	<classpathentry kind="src" path="Exercicios/25-10/Exercicio-Desafio-3/src"/>
+	<classpathentry kind="src" path="Hackaton/src"/>
+	<classpathentry kind="lib" path="Exercicios/19-12/ConnectDatabase/lib/mysql-connector-j-9.1.0.jar"/>
+	<classpathentry kind="lib" path="Exercicios/19-12/ConnectDatabase/lib/mysql-connector-java-9.1.0.jar"/>
+	<classpathentry kind="output" path="Exercicios/06-11/Desafio_Da_Forca/bin"/>
+</classpath>
